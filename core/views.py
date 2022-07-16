@@ -6,7 +6,10 @@ from django.shortcuts import redirect #usado para redirecionar usuário anonimo.
 
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'produtos': Produto.objects.all()
+    }
+    return render(request, 'index.html', context)
 
 def produto(request):
     if str(request.user) != 'AnonymousUser': # verifica se o usuário está logado
