@@ -2,6 +2,7 @@ import email
 from tabnanny import verbose
 from django.db import models
 
+
 class Base(models.Model):
     criacao = models.DateTimeField(auto_now_add=True)
     atualizacao = models.DateTimeField(auto_now=True)
@@ -18,6 +19,7 @@ class Curso(Base):
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
+        ordering = ['id']
 
     def __str__(self):
         return self.titulo
@@ -35,6 +37,7 @@ class Avaliacao(Base):
         verbose_name_plural = 'Avaliações'
         unique_together = ['email', 'curso'] 
         #unique_together cada pessoa identificada pelo e-mail só pode avaliar uma vez o curso
+        ordering = ['id']
 
     def __str__(self):
         return f'{self.nome} avaliou o curso {self.curso} com nota {self.avaliacao}'
