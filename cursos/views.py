@@ -1,4 +1,3 @@
-import imp
 from rest_framework.generics import get_object_or_404
 from rest_framework import generics
 
@@ -7,8 +6,12 @@ from rest_framework.decorators import action #API V2
 from rest_framework.response import Response #API V2
 from rest_framework import mixins
 
+from rest_framework import permissions
+
 from .models import Curso, Avaliacao
 from .serializers import CursoSerializer, AvaliacaoSerializer
+from .permissions import EhSuperUser
+
 
 """
 API V1
@@ -47,6 +50,12 @@ API V2
 """
 
 class CursoViewSet(viewsets.ModelViewSet):
+    permission_classes = (
+        EhSuperUser, 
+        permissions.DjangoModelPermissions,
+        )
+    # EhSuperUser => classe criada no arquivo permissions.py
+    # DjangoModelPermissions => permissão local para essa view com DjangoModelPermissions /definidas no admin
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
 
