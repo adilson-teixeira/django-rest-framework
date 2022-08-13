@@ -25,7 +25,7 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
         """nome da função deve ser = validade_(nome do campo a ser validado)"""
         if  valor in range(1, 6):
             return valor
-        raise serializers.ValidationError('A avaliação precisa ser no máximo 5.0')
+        raise serializers.ValidationError('A avaliação precisa ser um inteiro de no máximo 5')
 
 
 class CursoSerializer(serializers.ModelSerializer):
