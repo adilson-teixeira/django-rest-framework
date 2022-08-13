@@ -140,16 +140,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        #'rest_framework.authentication.TokenAuthentication',
-        #'rest_framework.authentication.IsAuthenticated',
+        'rest_framework.authentication.SessionAuthentication', # autent. por sessão
+        #'rest_framework.authentication.TokenAuthentication', #autent. por token
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        #'rest_framework.permissions.IsAuthenticated', ( apenas autenticados, inclusive leitura)
+        #'rest_framework.permissions.IsAuthenticatedOrReadOnly', #( apenas autenticados, inclusive leitura)
+        'rest_framework.permissions.IsAuthenticated', 
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 4
+    'PAGE_SIZE': 4, #paginação
+
+    #limitação de requisições/ Controle por cache/ aplicações muito grandes recomenda bd Redis
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '50/minute', # second, day, month, year
+        'user': '100/minute'
+    }
 }
 """
 Configurações que estão no plural em tuplas, podem existir mais de um tipo.
