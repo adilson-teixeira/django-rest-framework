@@ -140,12 +140,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication', # autent. por sessão
-        #'rest_framework.authentication.TokenAuthentication', #autent. por token
+        #'rest_framework.authentication.SessionAuthentication', # autent. por sessão
+        'rest_framework.authentication.TokenAuthentication', #autent. por token
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        #'rest_framework.permissions.IsAuthenticatedOrReadOnly', #( apenas autenticados, inclusive leitura)
-        'rest_framework.permissions.IsAuthenticated', 
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
+        #'rest_framework.permissions.IsAuthenticated', #( apenas autenticados, inclusive leitura)
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 4, #paginação
